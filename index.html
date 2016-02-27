@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+		<title>Uglify Online</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<style>
+			body {
+				padding-top: 70px;
+				padding-bottom: 20px;
+			}
+		</style>
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/jquery.bootstrap-touchspin.min.css">
+		<link rel="stylesheet" href="css/bootstrap-switch.min.css">
+		<link rel="stylesheet" href="css/bootstrap-select.min.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Uglify Online</a>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-xs-12">
+					<form role="form">
+						<div class="form-group">
+							<textarea id="js-in" class="form-control" rows="10" spellcheck="false" placeholder="Input"></textarea>
+							<textarea id="js-out" class="form-control" rows="10" spellcheck="false" placeholder="Output"></textarea>
+							<button type="submit" id="js-process" class="btn btn-default">Do it!</button>
+						</div>
+						<fieldset class="form-group">
+							<legend>Compress options</legend>
+							<div class="switch"><label for="compress-sequence"><input type="checkbox" checked id="compress-sequence" class="switch" /> join consecutive statements with the "comma operator"</label></div>
+							<div class="switch"><label for="compress-properties"><input type="checkbox" checked id="compress-properties" class="switch" /> optimize property access: <code>a["foo"]</code> → <code>a.foo</code></label></div>
+							<div class="switch"><label for="compress-deadCode"><input type="checkbox" checked id="compress-deadCode" class="switch" /> discard unreachable code</label></div>
+							<div class="switch"><label for="compress-dropDebugger"><input type="checkbox" checked id="compress-dropDebugger" class="switch" /> discard "debugger" statements</label></div>
+							<div class="switch"><label for="compress-unsafe"><input type="checkbox" id="compress-unsafe" class="switch" /> some unsafe optimizations</label></div>
+							<div class="switch"><label for="compress-unsafeComps"><input type="checkbox" id="compress-unsafeComps" class="switch" /> [unsafe_comps]</label></div>
+							<div class="switch"><label for="compress-conditionals"><input type="checkbox" checked id="compress-conditionals" class="switch" /> optimize if-s and conditional expressions</label></div>
+							<div class="switch"><label for="compress-comparisons"><input type="checkbox" checked id="compress-comparisons" class="switch" /> optimize comparisons</label></div>
+							<div class="switch"><label for="compress-evaluate"><input type="checkbox" checked id="compress-evaluate" class="switch" /> evaluate constant expressions</label></div>
+							<div class="switch"><label for="compress-booleans"><input type="checkbox" checked id="compress-booleans" class="switch" /> optimize boolean expressions</label></div>
+							<div class="switch"><label for="compress-loops"><input type="checkbox" checked id="compress-loops" class="switch" /> optimize loops</label></div>
+							<div class="switch"><label for="compress-unused"><input type="checkbox" checked id="compress-unused" class="switch" /> drop unused variables/functions</label></div>
+							<div class="switch"><label for="compress-hoistFuns"><input type="checkbox" checked id="compress-hoistFuns" class="switch" /> hoist function declarations</label></div>
+							<div class="switch"><label for="compress-keepFargs"><input type="checkbox" checked id="compress-keepFargs" class="switch" /> [keep-fargs]</label></div>
+							<div class="switch"><label for="compress-keepFnames"><input type="checkbox" id="compress-keepFnames" class="switch" /> [keep-fnames]</label></div>
+							<div class="switch"><label for="compress-hoistVars"><input type="checkbox" id="compress-hoistVars" class="switch" /> hoist variable declarations</label></div>
+							<div class="switch"><label for="compress-ifReturn"><input type="checkbox" checked id="compress-ifReturn" class="switch" /> optimize if-s followed by return/continue</label></div>
+							<div class="switch"><label for="compress-joinVars"><input type="checkbox" checked id="compress-joinVars" class="switch" /> join var declarations</label></div>
+							<div class="switch"><label for="compress-cascade"><input type="checkbox" checked id="compress-cascade" class="switch" /> try to cascade `right` into `left` in sequences</label></div>
+							<div class="switch"><label for="compress-sideEffects"><input type="checkbox" checked id="compress-sideEffects" class="switch" /> drop side-effect-free statements</label></div>
+							<div class="switch"><label for="compress-pureGetters"><input type="checkbox" id="compress-pureGetters" class="switch" /> object property access never has side effects?</label></div>
+							<!-- pure_funcs -->
+							<div class="switch"><label for="compress-negateIife"><input type="checkbox" checked id="compress-negateIife" class="switch" /> <code>(function(){})()</code> → <code>!function(){}</code> where returned value is discarded</label></div>
+							<div class="switch"><label for="compress-screwIe8"><input type="checkbox" id="compress-screwIe8" class="switch" /> [screw_ie8]</label></div>
+							<div class="switch"><label for="compress-dropConsole"><input type="checkbox" id="compress-dropConsole" class="switch" /> [drop_console]</label></div>
+							<div class="switch"><label for="compress-angular"><input type="checkbox" id="compress-angular" class="switch" /> [angular]</label></div>
+							<div class="switch"><label for="compress-warnings"><input type="checkbox" checked id="compress-warnings" class="switch" /> warn about potentially dangerous optimizations/code</label></div>
+							<!-- global-defs -->
+						</fieldset>
+						<fieldset class="form-group">
+							<legend>Mangle options</legend>
+							<div class="switch"><label for="mangle-mangle"><input type="checkbox" checked id="mangle-mangle" class="switch" /> Mangle</label></div>
+							<!-- mangleProperties -->
+						</fieldset>
+						<fieldset class="form-group">
+							<legend>Output options</legend>
+							<div class="number"><label for="output-indentStart"><input type="text" value="0" id="output-indentStart" class="spinner" /> start indentation on every line (only when `beautify`)</label></div>
+							<div class="number"><label for="output-indentLevel"><input type="text" value="4" id="output-indentLevel" class="spinner" /> indentation level (only when `beautify`)</label></div>
+							<div class="switch"><label for="output-quoteKeys"><input type="checkbox" id="output-quoteKeys" class="switch" /> quote all keys in object literals?</label></div>
+							<div class="switch"><label for="output-spaceColon"><input type="checkbox" checked id="output-spaceColon" class="switch" /> add a space after colon signs?</label></div>
+							<div class="switch"><label for="output-asciiOnly"><input type="checkbox" id="output-asciiOnly" class="switch" /> output ASCII-safe? (encodes Unicode characters as ASCII)</label></div>
+							<div class="switch"><label for="output-unescapeRegexps"><input type="checkbox" id="output-unescapeRegexps" class="switch" /> [unescape_regexps]</label></div>
+							<div class="switch"><label for="output-inlineScript"><input type="checkbox" id="output-inlineScript" class="switch" /> escape <code>"&lt;/script"</code>?</label></div>
+							<div class="number"><label for="output-width"><input type="text" value="80" id="output-width" class="spinner" /> informative maximum line width (for beautified output)</label></div>
+							<div class="number"><label for="output-maxLineLen"><input type="text" value="32000" id="output-maxLineLen" class="spinner" /> maximum line length (for non-beautified output)</label></div>
+							<div class="switch"><label for="output-beautify"><input type="checkbox" id="output-beautify" class="switch" /> beautify output?</label></div>
+							<!-- source_map -->
+							<div class="switch"><label for="output-bracketize"><input type="checkbox" id="output-bracketize" class="switch" /> use brackets every time?</label></div>
+							<div class="switch"><label for="output-semicolons"><input type="checkbox" checked id="output-semicolons" class="switch" /> use semicolons to separate statements? (otherwise, newlines)</label></div>
+							<div class="switch"><label for="output-comments"><input type="checkbox" id="output-comments" class="switch" /> output comments?</label></div>
+							<div class="switch"><label for="output-shebang"><input type="checkbox" checked id="output-shebang" class="switch" /> [shebang]</label></div>
+							<div class="switch"><label for="output-preserveLine"><input type="checkbox" id="output-preserveLine" class="switch" /> [preserve_line]</label></div>
+							<div class="switch"><label for="output-screwIe8"><input type="checkbox" id="output-screwIe8" class="switch" /> [screw_ie8]</label></div>
+							<!-- preamble -->
+							<div class="select dropright">
+								<label for="output-quoteStyle">
+									<select id="output-quoteStyle" class="selectpicker">
+										<option value="0">Auto</option>
+										<option value="1">Single</option>
+										<option value="2">Double</option>
+										<option value="3">Original</option>
+									</select>
+									Quoting style
+								</label>
+							</div>
+						</fieldset>
+						<button type="reset" class="btn btn-default">Reset</button>
+					</form>
+				</div>
+			</div>
+
+			<hr>
+
+			<footer>
+				<a href="#" data-toggle="modal" data-target="#aboutModal">About...</a>
+				<span class="email pull-right">@</span>
+			</footer>
+		</div>
+		<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="aboutModalLabel">About</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<p>I only authored this page. It would not exist without the following supporting cast.</p>
+						<p>Libraries and plugins:
+							<a href="http://lisperator.net/uglifyjs/">UglifyJS 2</a>,
+							<a href="https://jquery.com/">jQuery</a>,
+							<a href="http://getbootstrap.com/">Bootstrap</a>,
+							<a href="http://www.virtuosoft.eu/code/bootstrap-touchspin/">Bootstrap TouchSpin</a>,
+							<a href="http://www.bootstrap-switch.org/">Bootstrap Switch</a>, and
+							<a href="https://silviomoreto.github.io/bootstrap-select/">Bootstrap Select</a>.
+						</p>
+						<p>Technologies:
+							<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a>,
+							<a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS3</a>, and
+							<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Javascript</a>.
+						</p>
+						<p>Software:
+							<a href="https://notepad-plus-plus.org/">Notepad++</a>,
+							<a href="https://nodejs.org/">Node.js</a>,
+							<a href="https://www.npmjs.com/">npm</a>,
+							<a href="http://gruntjs.com/">Grunt</a>, and
+							<a href="http://browserify.org/">Browserify</a>.
+						</p>
+						<p>Resources:
+							<a href="https://developer.mozilla.org/">Mozilla Developer Network</a>,
+							<a href="http://caniuse.com/">Can I use...</a>, and
+							<a href="https://www.google.com/">Google Search</a>.
+						</p>
+						<p>And many others.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/vendor/jquery.min.js"></script>
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script src="js/vendor/jquery.bootstrap-touchspin.min.js"></script>
+		<script src="js/vendor/bootstrap-switch.min.js"></script>
+		<script src="js/vendor/bootstrap-select.min.js"></script>
+		<script src="js/uglify-bundle.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>

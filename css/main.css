@@ -1,0 +1,85 @@
+html,
+body {
+	min-height:100%;
+}
+*,
+*:before,
+*:after {
+	position:relative;
+}
+.bootstrap-select .bs-caret {
+	position:static;
+}
+
+.number label,
+.switch label,
+.select label {
+	vertical-align:middle;
+	font-weight:normal;
+}
+.number .bootstrap-touchspin {
+	display:inline-table;
+	width:150px;
+	margin-right:1ex;
+	vertical-align:middle;
+}
+.number .bootstrap-touchspin input {
+	text-align:right;
+}
+.switch .bootstrap-switch {
+	margin-right:1ex;
+}
+}
+.number .bootstrap-touchspin .spinner.form-control {
+	text-align:right;
+}
+.select .bootstrap-select {
+	width:150px !important;
+	margin-right:1ex;
+}
+.select.dropright .bootstrap-select {
+}
+.select.dropright .bootstrap-select.btn-group div.dropdown-menu {
+	min-width:auto;
+	top:50%;
+	left:100%;
+	margin-left:0.5ex;
+}
+.select.dropright .dropdown-toggle .bs-caret .caret {
+	margin-top:-4px;
+	border-top:4px solid transparent;
+	border-right:0;
+	border-bottom:4px solid transparent;
+	border-left:4px solid #000;
+}
+
+/* footer div {
+	display:flex;
+	display:-ms-flex;
+	display:-webkit-flex;
+	margin:0 -0.5ex;
+}
+footer span {
+	margin:0 0.5ex;
+}
+footer span:first-child {
+	white-space:nowrap;
+}
+footer span:nth-child(2) {
+	flex-grow:1;
+	-ms-flex-grow:1;
+	-webkit-flex-grow:1;
+}
+ */
+.email:before {
+	content:"ouroborus";
+}
+.email:after {
+	content:"ouroborus.org";
+}
+
+
+
+
+
+
