@@ -10,6 +10,9 @@ body {
 .bootstrap-select .bs-caret {
 	position:static;
 }
+.modal .close {
+	z-index:1;
+}
 
 .number label,
 .switch label,
