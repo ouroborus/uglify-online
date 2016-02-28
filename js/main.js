@@ -19,20 +19,33 @@ $('.select.dropright .selectpicker').selectpicker({
 	$menu.css({marginTop:-$menu.outerHeight()/2});
 });
 
-// Here's where the magic happens
+// Fix reset issue in selectpicker
+$('form').on('reset', function(event){
+	$('.selectpicker',this).each(function(index, element){
+		var $this = $(this);
+		setTimeout(function(){
+			$this.selectpicker('val',$this.val());
+		},0);
+	})
+});
+
+// Kill default submit
+$('form').on('submit',false);
+
+// Prepare for magic
 var $jsIn = $('#js-in'),
 	$jsOut = $('#js-out'),
 	$jsProcess = $('#js-process'),
 	warnings = [],
 	warn_function = UglifyJS.AST_Node.warn_function;
 
+// Hook uglify's warn system
 UglifyJS.AST_Node.warn_function = function(txt){
 	warnings.push(txt);
 	warn_function(txt);
 };
 
-$('form').on('submit',false);
-
+// This is where the magic happens
 $jsProcess.on('click',function(e){
 	warnings = [];
 	try {
