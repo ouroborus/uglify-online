@@ -17,8 +17,15 @@ body {
 .number label,
 .switch label,
 .select label {
-	vertical-align:middle;
 	font-weight:normal;
+}
+.number label > span,
+.switch label > span,
+.select label > span {
+	display:inline-block;
+	width:calc(100% - 150px - 1ex);
+	vertical-align:middle;
+	margin:-3px 0;
 }
 .number .bootstrap-touchspin {
 	display:inline-table;
@@ -54,6 +61,20 @@ body {
 	border-right:0;
 	border-bottom:4px solid transparent;
 	border-left:4px solid #000;
+}
+.select.dropright .dropdown-menu {
+	display:block;
+	visibility:hidden;
+	opacity:0;
+	transform-origin:left center;
+	transform:scale(0);
+	transition:opacity .25s linear, transform .25s cubic-bezier(.6,-0.28,.74,.05) /* ease in backward */, visibility 0s linear .25s;
+}
+.select.dropright .open > .dropdown-menu {
+	visibility:visible;
+	opacity:1;
+	transform:scale(1);
+	transition:.25s cubic-bezier(.08,.82,.17,1); /* ease out circular */ 
 }
 
 /* footer div {
