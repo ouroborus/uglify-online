@@ -7,6 +7,9 @@ body {
 *:after {
 	position:relative;
 }
+label {
+	width:100%;
+}
 .bootstrap-select .bs-caret {
 	position:static;
 }
