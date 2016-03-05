@@ -28,112 +28,120 @@
 				</div>
 			</div>
 		</nav>
-
-		<div class="container">
-			
-			<div class="row">
-				<div class="col-xs-12">
-					<form role="form">
-						<div class="form-group">
-							<textarea id="js-in" class="form-control" rows="10" spellcheck="false" placeholder="Input"></textarea>
-							<textarea id="js-out" class="form-control" rows="10" spellcheck="false" placeholder="Output"></textarea>
-							<button type="submit" id="js-process" class="btn btn-default">Do it!</button>
-						</div>
-						<fieldset class="form-group">
-							<legend>Compress options</legend>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="switch"><label for="compress-sequence"><input type="checkbox" checked id="compress-sequence" class="switch"><span>join consecutive statements with the "comma operator"</span></label></div>
-									<div class="switch"><label for="compress-properties"><input type="checkbox" checked id="compress-properties" class="switch"><span>optimize property access: <code>a["foo"]</code> → <code>a.foo</code></span></label></div>
-									<div class="switch"><label for="compress-deadCode"><input type="checkbox" checked id="compress-deadCode" class="switch"><span>discard unreachable code</span></label></div>
-									<div class="switch"><label for="compress-dropDebugger"><input type="checkbox" checked id="compress-dropDebugger" class="switch"><span>discard "debugger" statements</span></label></div>
-									<div class="switch"><label for="compress-unsafe"><input type="checkbox" id="compress-unsafe" class="switch"><span>some unsafe optimizations</span></label></div>
-									<div class="switch"><label for="compress-unsafeComps"><input type="checkbox" id="compress-unsafeComps" class="switch"><span>[unsafe_comps]</span></label></div>
-									<div class="switch"><label for="compress-conditionals"><input type="checkbox" checked id="compress-conditionals" class="switch"><span>optimize if-s and conditional expressions</span></label></div>
-									<div class="switch"><label for="compress-comparisons"><input type="checkbox" checked id="compress-comparisons" class="switch"><span>optimize comparisons</span></label></div>
-									<div class="switch"><label for="compress-evaluate"><input type="checkbox" checked id="compress-evaluate" class="switch"><span>evaluate constant expressions</span></label></div>
-									<div class="switch"><label for="compress-booleans"><input type="checkbox" checked id="compress-booleans" class="switch"><span>optimize boolean expressions</span></label></div>
-									<div class="switch"><label for="compress-loops"><input type="checkbox" checked id="compress-loops" class="switch"><span>optimize loops</span></label></div>
-									<div class="switch"><label for="compress-unused"><input type="checkbox" checked id="compress-unused" class="switch"><span>drop unused variables/functions</span></label></div>
-									<div class="switch"><label for="compress-hoistFuns"><input type="checkbox" checked id="compress-hoistFuns" class="switch"><span>hoist function declarations</span></label></div>
-								</div>
-								<div class="col-md-6">
-									<div class="switch"><label for="compress-keepFargs"><input type="checkbox" checked id="compress-keepFargs" class="switch"><span>[keep-fargs]</span></label></div>
-									<div class="switch"><label for="compress-keepFnames"><input type="checkbox" id="compress-keepFnames" class="switch"><span>[keep-fnames]</span></label></div>
-									<div class="switch"><label for="compress-hoistVars"><input type="checkbox" id="compress-hoistVars" class="switch"><span>hoist variable declarations</span></label></div>
-									<div class="switch"><label for="compress-ifReturn"><input type="checkbox" checked id="compress-ifReturn" class="switch"><span>optimize if-s followed by return/continue</span></label></div>
-									<div class="switch"><label for="compress-joinVars"><input type="checkbox" checked id="compress-joinVars" class="switch"><span>join var declarations</span></label></div>
-									<div class="switch"><label for="compress-cascade"><input type="checkbox" checked id="compress-cascade" class="switch"><span>try to cascade `right` into `left` in sequences</span></label></div>
-									<div class="switch"><label for="compress-sideEffects"><input type="checkbox" checked id="compress-sideEffects" class="switch"><span>drop side-effect-free statements</span></label></div>
-									<div class="switch"><label for="compress-pureGetters"><input type="checkbox" id="compress-pureGetters" class="switch"><span>object property access never has side effects?</span></label></div>
-									<!-- pure_funcs -->
-									<div class="switch"><label for="compress-negateIife"><input type="checkbox" checked id="compress-negateIife" class="switch"><span><code>(function(){})()</code> → <code>!function(){}</code> where returned value is discarded</span></label></div>
-									<div class="switch"><label for="compress-screwIe8"><input type="checkbox" id="compress-screwIe8" class="switch"><span>[screw_ie8]</span></label></div>
-									<div class="switch"><label for="compress-dropConsole"><input type="checkbox" id="compress-dropConsole" class="switch"><span>[drop_console]</span></label></div>
-									<div class="switch"><label for="compress-angular"><input type="checkbox" id="compress-angular" class="switch"><span>[angular]</span></label></div>
-									<div class="switch"><label for="compress-warnings"><input type="checkbox" checked id="compress-warnings" class="switch"><span>warn about potentially dangerous optimizations/code</span></label></div>
-									<!-- global-defs -->
-								</div>
+		<noscript>I can haz javascripts?</noscript>
+		<div id="loading" class="hide"><div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAgCAMAAACSAVCjAAAAh1BMVEUAAABBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUNBQUOSq0yLAAAALHRSTlMA+NNXEe8Kfy2/aFz15ZZPD7KINs+5dm0ZEwb6nyQg6GFD16ZKPseQOh7bqh+2OeYAAAHMSURBVDjLrVXZloIwDC1UNoWigAiyuIA6zvD/3zdAG+xGn7xPhHvSJmlugr6JFnsJ8eLNCr2PvVfi4VbPbvL7QGF1vob3O4vx93yv0idn4FCX8umEp52tTB8HEZde4ONI4g9CkoU9KPA43lNpu+AKA+4C6jOj3YOOtj9F4PgLV4aAxfjkEr9wKYD7bnGIXYTSugI7K+fcwbSIPwYTL6XaUfczq024g5eyhQNyZjwbuC+kPyKa4JWdfkMA97UcMKZwU+r5wzrhOlsBNU6Iw7aClMY7uik4LNCMnC+jh9lIQB/CK0wBk6QR6YyG7I6fKVwv4gEPkSMNTpRLx09MP5WWf7AIql4nBsrhTy6q6G6sSk6jERulth9/TjByX/wWClWCvzZ+QAKtWhriTw1lOkLr7NfrB+93RjyKV1D7qIwkKQBseL+V/kknR8dHaQgpvLX9o+9fdKUxdQj1FgjzoelfvX7ekHY2lRc6uUqgCHjRj6Tf46Rfn1hgk5mtFvEnjaRfdX5EDjdLWnqdxc2PiJ8f5vmVtdCIjn5+medn7S50o6Htwji/Q2HCu2RQ5rdxfxxaWY2ZuD+M++svRSpwMIj7S0Vj3p8F9gjsz2/hH/2HkQ/Gv6OqAAAAAElFTkSuQmCC" alt="Loading..."><span>Loading</span></div></div>
+		<script>document.getElementById('loading').className='';</script>
+		<div id="content" class="loading">
+			<div class="container">
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<form role="form">
+							<div class="form-group">
+								<textarea id="js-in" class="form-control" rows="10" spellcheck="false" placeholder="Input"></textarea>
+								<textarea id="js-out" class="form-control" rows="10" spellcheck="false" placeholder="Output"></textarea>
+								<button type="submit" id="js-process" class="btn btn-default">Do it!</button>
 							</div>
-						</fieldset>
-						<fieldset class="form-group">
-							<legend>Mangle options</legend>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="switch"><label for="mangle-mangle"><input type="checkbox" checked id="mangle-mangle" class="switch"><span>Mangle</span></label></div>
-									<!-- mangleProperties -->
-								</div>
-							</div>
-						</fieldset>
-						<fieldset class="form-group">
-							<legend>Output options</legend>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="number"><label for="output-indentStart"><input type="text" value="0" id="output-indentStart" class="spinner"><span>start indentation on every line (only when `beautify`)</span></label></div>
-									<div class="number"><label for="output-indentLevel"><input type="text" value="4" id="output-indentLevel" class="spinner"><span>indentation level (only when `beautify`)</span></label></div>
-									<div class="switch"><label for="output-quoteKeys"><input type="checkbox" id="output-quoteKeys" class="switch"><span>quote all keys in object literals?</span></label></div>
-									<div class="switch"><label for="output-spaceColon"><input type="checkbox" checked id="output-spaceColon" class="switch"><span>add a space after colon signs?</span></label></div>
-									<div class="switch"><label for="output-asciiOnly"><input type="checkbox" id="output-asciiOnly" class="switch"><span>output ASCII-safe? (encodes Unicode characters as ASCII)</span></label></div>
-									<div class="switch"><label for="output-unescapeRegexps"><input type="checkbox" id="output-unescapeRegexps" class="switch"><span>[unescape_regexps]</span></label></div>
-									<div class="switch"><label for="output-inlineScript"><input type="checkbox" id="output-inlineScript" class="switch"><span>escape <code>"&lt;/script"</code>?</span></label></div>
-									<div class="number"><label for="output-width"><input type="text" value="80" id="output-width" class="spinner"><span>informative maximum line width (for beautified output)</span></label></div>
-									<div class="number"><label for="output-maxLineLen"><input type="text" value="32000" id="output-maxLineLen" class="spinner"><span>maximum line length (for non-beautified output)</span></label></div>
-								</div>
-								<div class="col-md-6">
-									<div class="switch"><label for="output-beautify"><input type="checkbox" id="output-beautify" class="switch"><span>beautify output?</span></label></div>
-									<!-- source_map -->
-									<div class="switch"><label for="output-bracketize"><input type="checkbox" id="output-bracketize" class="switch"><span>use brackets every time?</span></label></div>
-									<div class="switch"><label for="output-semicolons"><input type="checkbox" checked id="output-semicolons" class="switch"><span>use semicolons to separate statements? (otherwise, newlines)</span></label></div>
-									<div class="switch"><label for="output-comments"><input type="checkbox" id="output-comments" class="switch"><span>output comments?</span></label></div>
-									<div class="switch"><label for="output-shebang"><input type="checkbox" checked id="output-shebang" class="switch"><span>[shebang]</span></label></div>
-									<div class="switch"><label for="output-preserveLine"><input type="checkbox" id="output-preserveLine" class="switch"><span>[preserve_line]</span></label></div>
-									<div class="switch"><label for="output-screwIe8"><input type="checkbox" id="output-screwIe8" class="switch"><span>[screw_ie8]</span></label></div>
-									<!-- preamble -->
-									<div class="select dropright">
-										<label for="output-quoteStyle">
-											<select id="output-quoteStyle" class="selectpicker">
-												<option selected value="0">Auto</option>
-												<option value="1">Single</option>
-												<option value="2">Double</option>
-												<option value="3">Original</option>
-											</select><span>
-											Quoting style</span>
-										</label>
+							<fieldset class="form-group">
+								<legend>Compress options</legend>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="switch"><label for="compress-sequence"><input type="checkbox" checked id="compress-sequence" class="switch"><span>join consecutive statements with the "comma operator"</span></label></div>
+										<div class="switch"><label for="compress-properties"><input type="checkbox" checked id="compress-properties" class="switch"><span>optimize property access: <code>a["foo"]</code> → <code>a.foo</code></span></label></div>
+										<div class="switch"><label for="compress-deadCode"><input type="checkbox" checked id="compress-deadCode" class="switch"><span>discard unreachable code</span></label></div>
+										<div class="switch"><label for="compress-dropDebugger"><input type="checkbox" checked id="compress-dropDebugger" class="switch"><span>discard "debugger" statements</span></label></div>
+										<div class="switch"><label for="compress-unsafe"><input type="checkbox" id="compress-unsafe" class="switch"><span>some unsafe optimizations</span></label></div>
+										<div class="switch"><label for="compress-unsafeComps"><input type="checkbox" id="compress-unsafeComps" class="switch"><span>[unsafe_comps]</span></label></div>
+										<div class="switch"><label for="compress-conditionals"><input type="checkbox" checked id="compress-conditionals" class="switch"><span>optimize if-s and conditional expressions</span></label></div>
+										<div class="switch"><label for="compress-comparisons"><input type="checkbox" checked id="compress-comparisons" class="switch"><span>optimize comparisons</span></label></div>
+										<div class="switch"><label for="compress-evaluate"><input type="checkbox" checked id="compress-evaluate" class="switch"><span>evaluate constant expressions</span></label></div>
+										<div class="switch"><label for="compress-booleans"><input type="checkbox" checked id="compress-booleans" class="switch"><span>optimize boolean expressions</span></label></div>
+										<div class="switch"><label for="compress-loops"><input type="checkbox" checked id="compress-loops" class="switch"><span>optimize loops</span></label></div>
+										<div class="switch"><label for="compress-unused"><input type="checkbox" checked id="compress-unused" class="switch"><span>drop unused variables/functions</span></label></div>
+										<div class="switch"><label for="compress-hoistFuns"><input type="checkbox" checked id="compress-hoistFuns" class="switch"><span>hoist function declarations</span></label></div>
+									</div>
+									<div class="col-md-6">
+										<div class="switch"><label for="compress-keepFargs"><input type="checkbox" checked id="compress-keepFargs" class="switch"><span>[keep-fargs]</span></label></div>
+										<div class="switch"><label for="compress-keepFnames"><input type="checkbox" id="compress-keepFnames" class="switch"><span>[keep-fnames]</span></label></div>
+										<div class="switch"><label for="compress-hoistVars"><input type="checkbox" id="compress-hoistVars" class="switch"><span>hoist variable declarations</span></label></div>
+										<div class="switch"><label for="compress-ifReturn"><input type="checkbox" checked id="compress-ifReturn" class="switch"><span>optimize if-s followed by return/continue</span></label></div>
+										<div class="switch"><label for="compress-joinVars"><input type="checkbox" checked id="compress-joinVars" class="switch"><span>join var declarations</span></label></div>
+										<div class="switch"><label for="compress-cascade"><input type="checkbox" checked id="compress-cascade" class="switch"><span>try to cascade `right` into `left` in sequences</span></label></div>
+										<div class="switch"><label for="compress-sideEffects"><input type="checkbox" checked id="compress-sideEffects" class="switch"><span>drop side-effect-free statements</span></label></div>
+										<div class="switch"><label for="compress-pureGetters"><input type="checkbox" id="compress-pureGetters" class="switch"><span>object property access never has side effects?</span></label></div>
+										<!-- pure_funcs -->
+										<div class="switch"><label for="compress-negateIife"><input type="checkbox" checked id="compress-negateIife" class="switch"><span><code>(function(){})()</code> → <code>!function(){}</code> where returned value is discarded</span></label></div>
+										<div class="switch"><label for="compress-screwIe8"><input type="checkbox" id="compress-screwIe8" class="switch"><span>[screw_ie8]</span></label></div>
+										<div class="switch"><label for="compress-dropConsole"><input type="checkbox" id="compress-dropConsole" class="switch"><span>[drop_console]</span></label></div>
+										<div class="switch"><label for="compress-angular"><input type="checkbox" id="compress-angular" class="switch"><span>[angular]</span></label></div>
+										<div class="switch"><label for="compress-warnings"><input type="checkbox" checked id="compress-warnings" class="switch"><span>warn about potentially dangerous optimizations/code</span></label></div>
+										<!-- global-defs -->
 									</div>
 								</div>
-							</div>
-						</fieldset>
-						<button type="reset" class="btn btn-default">Reset</button>
-					</form>
+							</fieldset>
+							<fieldset class="form-group">
+								<legend>Mangle options</legend>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="switch"><label for="mangle-mangle"><input type="checkbox" checked id="mangle-mangle" class="switch"><span>Mangle</span></label></div>
+										<!-- mangleProperties -->
+									</div>
+								</div>
+							</fieldset>
+							<fieldset class="form-group">
+								<legend>Output options</legend>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="number"><label for="output-indentStart"><input type="text" value="0" id="output-indentStart" class="spinner"><span>start indentation on every line (only when `beautify`)</span></label></div>
+										<div class="number"><label for="output-indentLevel"><input type="text" value="4" id="output-indentLevel" class="spinner"><span>indentation level (only when `beautify`)</span></label></div>
+										<div class="switch"><label for="output-quoteKeys"><input type="checkbox" id="output-quoteKeys" class="switch"><span>quote all keys in object literals?</span></label></div>
+										<div class="switch"><label for="output-spaceColon"><input type="checkbox" checked id="output-spaceColon" class="switch"><span>add a space after colon signs?</span></label></div>
+										<div class="switch"><label for="output-asciiOnly"><input type="checkbox" id="output-asciiOnly" class="switch"><span>output ASCII-safe? (encodes Unicode characters as ASCII)</span></label></div>
+										<div class="switch"><label for="output-unescapeRegexps"><input type="checkbox" id="output-unescapeRegexps" class="switch"><span>[unescape_regexps]</span></label></div>
+										<div class="switch"><label for="output-inlineScript"><input type="checkbox" id="output-inlineScript" class="switch"><span>escape <code>"&lt;/script"</code>?</span></label></div>
+										<div class="number"><label for="output-width"><input type="text" value="80" id="output-width" class="spinner"><span>informative maximum line width (for beautified output)</span></label></div>
+										<div class="number"><label for="output-maxLineLen"><input type="text" value="32000" id="output-maxLineLen" class="spinner"><span>maximum line length (for non-beautified output)</span></label></div>
+									</div>
+									<div class="col-md-6">
+										<div class="switch"><label for="output-beautify"><input type="checkbox" id="output-beautify" class="switch"><span>beautify output?</span></label></div>
+										<!-- source_map -->
+										<div class="switch"><label for="output-bracketize"><input type="checkbox" id="output-bracketize" class="switch"><span>use brackets every time?</span></label></div>
+										<div class="switch"><label for="output-semicolons"><input type="checkbox" checked id="output-semicolons" class="switch"><span>use semicolons to separate statements? (otherwise, newlines)</span></label></div>
+										<div class="switch"><label for="output-comments"><input type="checkbox" id="output-comments" class="switch"><span>output comments?</span></label></div>
+										<div class="switch"><label for="output-shebang"><input type="checkbox" checked id="output-shebang" class="switch"><span>[shebang]</span></label></div>
+										<div class="switch"><label for="output-preserveLine"><input type="checkbox" id="output-preserveLine" class="switch"><span>[preserve_line]</span></label></div>
+										<div class="switch"><label for="output-screwIe8"><input type="checkbox" id="output-screwIe8" class="switch"><span>[screw_ie8]</span></label></div>
+										<!-- preamble -->
+										<div class="select dropright">
+											<label for="output-quoteStyle">
+												<select id="output-quoteStyle" class="selectpicker">
+													<option selected value="0">Auto</option>
+													<option value="1">Single</option>
+													<option value="2">Double</option>
+													<option value="3">Original</option>
+												</select><span>
+												Quoting style</span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<button type="reset" class="btn btn-default">Reset</button>
+						</form>
+					</div>
 				</div>
+
 			</div>
+		</div>
+		<div class="footer">
+			<div class="container">
+				<hr>
 
-			<hr>
-
-			<footer>
-				<a href="#" data-toggle="modal" data-target="#aboutModal">About...</a>
-				<span class="email pull-right">@</span>
-			</footer>
+				<footer>
+					<a href="#" data-toggle="modal" data-target="#aboutModal">About...</a>
+					<span class="email pull-right">@</span>
+				</footer>
+			</div>
 		</div>
 		<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
 			<div class="modal-dialog" role="document">
@@ -184,5 +192,11 @@
 		<script src="js/vendor/bootstrap-select.min.js"></script>
 		<script src="js/uglify-bundle.js"></script>
 		<script src="js/main.js"></script>
+		<script>
+			$(function(){
+				$('#loading').addClass('hide');
+				$('#content').removeClass('loading');
+			});
+		</script>
 	</body>
 </html>
